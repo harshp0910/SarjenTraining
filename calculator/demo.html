@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<script>
+    function calc(btn){
+      const ip1 = document.getElementById('ip1');
+      const ip2 = document.getElementById('ip2');
+      const val1 = parseInt(ip1.value);
+      const val2 = parseInt(ip2.value);
+      let result;
+      if(btn == 'add'){
+        result = val1 + val2;
+      }  
+      else if(btn == 'sub'){
+        result = val1 - val2;
+      }
+      else if(btn == 'mul'){
+        result = val1 * val2;
+      }
+      else if(btn == 'div'){
+        result = val1 / val2;
+      }
+      else{
+        result = "No input selected";
+      }
+      document.getElementById('output').textContent = result;
+    }
+</script>
+<body>
+    <div class="calc">
+      <h1>Calculator</h1>
+      <form>
+      <input type="number" id="ip1" />
+      <input type="number" id="ip2" />
+      <button type="button" onclick="calc('add')">Add</button>
+      <button type="button" onclick="calc('sub')">Subtract</button>
+      <button type="button" onclick="calc('mul')">Multiplication</button>
+      <button type="button" onclick="calc('div')">Division</button>
+      </form>
+      <div id="output" style="margin-top:20px;font-weight:bold;"></div>
+    </div>
+</body>
+</html>
