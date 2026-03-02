@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+</head>
+<body>
+    <h1>Counter</h1>
+    <p id="count"></p>
+    <button type="button" onclick="increment()">Increment</button>
+    <button type="button" onclick="decrement()">Decrement</button>
+    <script>
+        var count = 0
+        var printcount = document.getElementById("count")
+        printcount.innerHTML = "Counter is " + count
+        function increment(){
+            count = count+1
+            printcount.innerHTML = "Counter is " + count
+           
+           localStorage.setItem("count", count)
+        }
+        function decrement(){
+            count = count-1
+            printcount.innerHTML = "Counter is " + count
+           
+           localStorage.setItem("count", count)
+        }
+    </script>    
+</body>
+</html>
