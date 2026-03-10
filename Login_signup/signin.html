@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+    <div class="login">
+        <label for="">Username:</label>
+        <input type="text" id="user">
+        <br>
+        <label for="">Password:</label>
+        <input type="password" id="pass">
+        <br>
+        <button onclick="login()">SIGN IN</button>
+        <br>
+        <a href="edit.html">Edit Profile</a>
+        
+    </div>
+    <script>
+        var username = document.getElementById("user")
+        var password = document.getElementById("pass")
+        var user = localStorage.getItem("username")
+        var pass = localStorage.getItem("password")
+        function login(){
+            if(username.value == user && password.value == pass){
+                document.writeln("Hii " + user)
+            } else {
+                alert("Invalid username or password!")
+            }
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+
+<body>
+    <div class="edit">
+        <form id="editForm">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="user"></td>
+                        <td id="pass"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" id="user_new" name="username"></td>
+                        <td><input type="password" id="pass_new" name="password"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <button type="button" onclick="edit_profile()">Submit</button>
+            <button onclick="delete_user()"> Delete </button>
+        </form>
+    </div>
+    <script>
+        var user = localStorage.getItem("username");
+        var pass = localStorage.getItem("password");
+
+        document.getElementById("user").textContent = user;
+        document.getElementById("pass").textContent = pass;
+        document.getElementById("user_new").value = user;
+        document.getElementById("pass_new").value = pass;
+
+        function edit_profile() {
+            var user_new = document.getElementById("user_new").value;
+            var pass_new = document.getElementById("pass_new").value;
+            localStorage.setItem("username", user_new);
+            localStorage.setItem("password", pass_new);
+            alert("Profile updated!");
+        }
+        function delete_user() {
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
+            alert("User Deleted Successfully!!! ")
+        }
+    </script>
+</body>
+
+</html>
