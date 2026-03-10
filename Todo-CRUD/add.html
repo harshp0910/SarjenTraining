@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Todo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Add Todo</h2>
+        <input type="text" id="ip" placeholder="Enter todo">
+        <button onclick="addTodo()">Add</button>
+        <br><br>
+        <a href="read.html">View Todos</a>
+    </div>
+    <script>
+    function getTodos() {
+        return JSON.parse(localStorage.getItem('todos')) || [];
+    }
+    function setTodos(todos) {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+    function addTodo() {
+        var input = document.getElementById('ip');
+        var value = input.value.trim();
+        if (!value) return;
+        var todos = getTodos();
+        todos.push(value);
+        setTodos(todos);
+        input.value = '';
+        alert('Todo added!');
+    }
+    </script>
+</body>
+</html>

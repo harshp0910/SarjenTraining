@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo-List</title>
+</head>
+<body>
+    <h2>Todo List</h2>
+    <input type="text" id="taskInput">
+    <button onclick="addTask()">Add</button>
+    <button onclick="delete_tasks(); showTasks();">Delete All</button>
+    <table border="1" style="margin-top:10px;">
+        <thead>
+            <tr><th>Task</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="taskList"></tbody>
+    </table>
+
+    <script>
+    function getTasks() {
+        return JSON.parse(localStorage.getItem('tasks')) || [];
+    }
+
+    function setTasks(tasks) {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    function delete_tasks(tasks){
+        localStorage.removeItem('tasks');
+    }
+    function showTasks() {
+        var tasks = getTasks();
+        var list = document.getElementById('taskList');
+        list.innerHTML = '';
+        for (var i = 0; i < tasks.length; i++) {
+            var row = document.createElement('tr');
+            var taskCell = document.createElement('td');
+            var actionCell = document.createElement('td');
+            if (tasks[i].edit) {
+                taskCell.innerHTML = '<input id="editInput'+i+'" value="'+tasks[i].text+'">';
+                actionCell.innerHTML = '<button onclick="saveEdit('+i+')">Save</button> ' +
+                    '<button onclick="cancelEdit('+i+')">Cancel</button>';
+            } else {
+                taskCell.textContent = tasks[i].text;
+                actionCell.innerHTML = '<button onclick="editTask('+i+')">Edit</button> ' +
+                    '<button onclick="deleteTask('+i+')">Delete</button>';
+            }
+            row.appendChild(taskCell);
+            row.appendChild(actionCell);
+            list.appendChild(row);
+        }
+    }
+
+    function addTask() {
+        var input = document.getElementById('taskInput');
+        var value = input.value.trim();
+        if (value === '') return;
+        var tasks = getTasks();
+        tasks.push({text: value});
+        setTasks(tasks);
+        input.value = '';
+        showTasks();
+    }
+
+    function editTask(i) {
+        var tasks = getTasks();
+        tasks[i].edit = true;
+        setTasks(tasks);
+        showTasks();
+    }
+
+    function saveEdit(i) {
+        var tasks = getTasks();
+        var value = document.getElementById('editInput'+i).value.trim();
+        if (value === '') return;
+        tasks[i].text = value;
+        delete tasks[i].edit;
+        setTasks(tasks);
+        showTasks();
+    }
+
+
+    showTasks();
+    </script>
+</body>
+</html>
+</html>

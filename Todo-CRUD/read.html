@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Todo List</h2>
+        <table>
+            <thead><tr><th>Task</th><th>Actions</th></tr></thead>
+            <tbody id="todoTable"></tbody>
+        </table>
+        <br>
+        <a href="add.html">Add Todo</a>
+    </div>
+    <script>
+    function getTodos() {
+        return JSON.parse(localStorage.getItem('todos')) || [];
+    }
+    function showTodos() {
+        var todos = getTodos();
+        var table = document.getElementById('todoTable');
+        table.innerHTML = '';
+        for (var i = 0; i < todos.length; i++) {
+            var row = document.createElement('tr');
+            row.innerHTML = '<td>' + todos[i] + '</td>' +
+                '<td>' +
+                '<a href="edit.html?i=' + i + '">Edit</a> ' +
+                '<a href="delete.html?i=' + i + '">Delete</a>' +
+                '</td>';
+            table.appendChild(row);
+        }
+    }
+    showTodos();
+    </script>
+</body>
+</html>

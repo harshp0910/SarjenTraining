@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Todo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Todo</h2>
+        <input type="text" id="editInput">
+        <button onclick="saveEdit()">Save</button>
+        <br><br>
+        <a href="read.html">Back to List</a>
+    </div>
+    <script>
+    function getTodos() {
+        return JSON.parse(localStorage.getItem('todos')) || [];
+    }
+    function setTodos(todos) {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+    function getIndex() {
+        var params = new URLSearchParams(window.location.search);
+        return parseInt(params.get('i'));
+    }
+
+    var todos = getTodos();
+    var idx = getIndex();
+    var todo = todos[idx];
+    document.getElementById('editInput').value = todo || '';
+
+    function saveEdit() {
+        var new_todo = document.getElementById('editInput').value.trim();
+        if (!new_todo) return;
+        todos[idx] = new_todo;
+        setTodos(todos);
+        alert('Todo updated!');
+        window.location.href = 'read.html';
+    }
+    </script>
+</body>
+</html>
