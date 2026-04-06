@@ -1,17 +1,20 @@
 import React from 'react'
-class Signin extends React.Component {
+class SIGNINUSER extends React.Component {
     constructor(props) {
         super(props);
-        this.state={ user :{ } }
+        this.state={ user:{ }}
     }
-    login(){
-       var userdata = JSON.parse(localStorage.getItem('user'));
-        if(userdata.name=== this.state.user.name && userdata.pass===this.state.user.pass){
-            alert("Login Succesfully")
-        }
-        else{
-            alert("Invalid Username or Password")
-        }
+   login(){
+    const userdata = JSON.parse(localStorage.getItem('users')) || [];
+    const { name, pass } = this.state.user;
+    const found = userdata.find(u => u.name === name && u.pass === pass);
+    if (found) {
+        alert("Login Successfully");
+    }
+    else{
+        alert("Invalid Username or Password")
+    }
+       
     }
     render() { 
         return ( <>
@@ -25,5 +28,4 @@ class Signin extends React.Component {
             </> );
     }
 }
- 
-export default Signin;
+export default SIGNINUSER;
